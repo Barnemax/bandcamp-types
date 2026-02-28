@@ -39,11 +39,3 @@ export {
   SEL_LD_JSON,
   SEL_CRUMBS,
 } from './constants.js'
-export {
-  isUserConnected,
-  isDownloadPage,
-  isAccountPage,
-  isAlbumPage,
-  isArtistPage,
-  isRelevantPage,
-} from './page-detection.js'
