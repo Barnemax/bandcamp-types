@@ -30,6 +30,8 @@ export type {
   BandcampCollectionItem,
   BandcampCollectionResponse,
 } from './collection.js'
+export type { LoosePageBlob } from './guards.js'
+export { isCollectionPage, isDownloadPage, isTralbumPage } from './guards.js'
 export {
   BANDCAMP_COLLECTION_URL,
   BANDCAMP_COLLECTORS_URL,
