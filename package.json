@@ -1,6 +1,6 @@
 {
   "name": "@barnemax/bandcamp-types",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -18,9 +18,32 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "compile": "tsc --noEmit",
-    "prepublishOnly": "pnpm build"
+    "gen-keys": "tsx scripts/gen-keys.ts",
+    "lint": "eslint src scripts tests",
+    "prepublishOnly": "pnpm build",
+    "test": "tsx scripts/gen-keys.ts && vitest run",
+    "test:watch": "tsx scripts/gen-keys.ts && vitest"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "homepage": "https://github.com/Barnemax/bandcamp-types",
+  "keywords": [
+    "bandcamp",
+    "typescript",
+    "types"
+  ],
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "@types/node": "^25.3.3",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^10.0.2",
+    "node-html-parser": "^7.0.2",
+    "ts-morph": "^27.0.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }

@@ -61,4 +61,6 @@ const downloads = blob.download_items
 
 ## Notes
 
-Types are reverse-engineered from Bandcamp's live DOM — Bandcamp can change them without notice. `PageBlob` is intentionally partial: only fields that have been observed and used are typed.
+Types are reverse-engineered from Bandcamp's live DOM — Bandcamp can change them without notice.
+
+These types are **intentionally partial**: only properties useful to a consuming project are included. Internal Bandcamp fields (rendering hints, A/B flags, payment config, CAPTCHA keys, etc.) are omitted even when present in the real blob. If you need a field that isn't typed, open an issue or add it directly.

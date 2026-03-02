@@ -64,7 +64,7 @@ export interface FanData {
   bio: string
   photo: { image_id: number; width: number; height: number } | null
   website_url: string | null
-  is_own_page: boolean
+  is_own_page: boolean | null
   followers_count: number
   following_bands_count: number
   following_fans_count: number
@@ -140,7 +140,8 @@ export interface CollectionPageBlob {
  * Narrow further via `track_id`: absent = album, present = track.
  */
 export interface TralbumPageBlob {
-  fan_tralbum_data: FanTralbumData
+  /** Null when the page is viewed without authentication. */
+  fan_tralbum_data: FanTralbumData | null
   album_id: number
   track_id?: number
   band?: { name: string }
@@ -166,6 +167,130 @@ export interface DownloadPageBlob {
 }
 
 // ---------------------------------------------------------------------------
+// Yum (band/artist homepage) sub-types
+// ---------------------------------------------------------------------------
+
+export interface BandSite {
+  url: string
+  title: string
+  nav_type: string | null
+}
+
+export interface BandNavbarItem {
+  url: string
+  title: string
+  nav_type: string
+}
+
+/** The `mband` field — the band/artist's full profile data. */
+export interface MBand {
+  id: number
+  create_date: string
+  disabled_date: string | null
+  name: string
+  subdomain: string
+  url: string
+  https_url: string
+  local_url: string
+  https_local_url: string
+  url_hints: {
+    subdomain: string
+    custom_domain: string | null
+    custom_domain_verified: unknown | null
+  }
+  currency: string
+  fan_email: string | null
+  thanks_enabled: number
+  reviews_enabled: number
+  is_label: boolean
+  has_label: boolean
+  merch_enabled: boolean
+  google_analytics_id: string | null
+  has_recommendations: boolean
+  has_tralbums: boolean
+  has_public_tralbums: boolean
+  has_public_merch: boolean
+  has_any_downloads: boolean
+  has_discounts: boolean
+  has_download_codes: boolean
+  has_policies: boolean
+  sites: BandSite[]
+  navbar_items: BandNavbarItem[]
+  has_items_for_sale: boolean
+  playback_limits: {
+    streaming_limits_enabled: boolean
+    streaming_limit: number
+  }
+  genre_id: number | null
+  meets_buy_full_discography_criteria: boolean
+}
+
+export interface YumIdentities {
+  user: { id: number }
+  ip_country_code: string
+  fan: {
+    id: number
+    username: string
+    name: string
+    photo: number
+    private: boolean
+    verified: boolean
+    url: string
+  } | null
+  is_page_band_member: boolean | null
+  subscribed_to_page_band: boolean | null
+  bands: unknown[]
+  is_admin: boolean | null
+  labels: unknown[]
+  page_band: unknown | null
+}
+
+export interface FanOnboarding {
+  tooltips: unknown | null
+  num_tooltips: number
+  tooltip_number: unknown | null
+  current_index: unknown | null
+  complete: boolean
+  show_collection_banner: boolean
+  show_feed_banner: boolean
+  show_verify_banner: boolean
+  first_wishlisted_item_title: string | null
+  first_wishlisted_item_type: string | null
+  first_purchased_item_title: string | null
+  first_purchased_item_type: string | null
+  template: unknown | null
+  email: string
+  has_collection: number
+  has_seen_tooltips: boolean
+  show_first_wishlist_tooltip: boolean
+  deferred: boolean
+}
+
+/**
+ * Band/artist homepage (artist.bandcamp.com or artist.bandcamp.com/music).
+ * Discriminant: `mband` is present.
+ */
+export interface YumPageBlob {
+  mband: MBand
+  identities: YumIdentities
+  fan_onboarding?: FanOnboarding
+  api_params: {
+    is_corp: boolean
+    band_id: number
+    platform_closed: boolean
+    hard_to_download: boolean
+    fan_logged_in: boolean
+    band_url: string
+    was_logged_out: unknown | null
+    is_https: boolean
+    ref_url: string | null
+  }
+  localize_page?: boolean
+  locale?: string
+  languages?: Record<string, string>
+}
+
+// ---------------------------------------------------------------------------
 // Union — narrow with 'fan_data' in blob, 'fan_tralbum_data' in blob, etc.
 // ---------------------------------------------------------------------------
 
@@ -176,5 +301,6 @@ export interface DownloadPageBlob {
  * - `'fan_data' in blob`         → CollectionPageBlob
  * - `'fan_tralbum_data' in blob` → TralbumPageBlob  (album or track)
  * - `'download_items' in blob`   → DownloadPageBlob
+ * - `'mband' in blob`            → YumPageBlob
  */
-export type PageBlob = CollectionPageBlob | TralbumPageBlob | DownloadPageBlob
+export type PageBlob = CollectionPageBlob | TralbumPageBlob | DownloadPageBlob | YumPageBlob
