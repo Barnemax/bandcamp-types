@@ -2,6 +2,14 @@
 
 TypeScript types for Bandcamp's internal DOM structures, page data blobs, and collection APIs.
 
+## Installation
+
+```sh
+npm install -D @barnemax/bandcamp-types
+# or
+pnpm add -D @barnemax/bandcamp-types
+```
+
 ## Page blob
 
 Bandcamp embeds a JSON blob in `#pagedata[data-blob]` on every page. The shape varies by page type — modelled here as a discriminated union.

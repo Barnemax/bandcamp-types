@@ -92,10 +92,24 @@ export interface CollectorsBlob {
 // --- Fan collection API (`/api/fancollection/1/collection_items`) ---
 
 export interface BandcampCollectionItem {
-  id: number
+  fan_id: number
+  item_id: number
+  band_id: number
+  band_name: string
+  band_url: string
+  tralbum_id: number
+  tralbum_type: TralbumType
+  item_title: string
   item_url: string
+  item_art_url: string
+  purchased: string | null
+  is_preorder: boolean
+  download_available: boolean
+  token: string
 }
 
 export interface BandcampCollectionResponse {
   items: BandcampCollectionItem[]
+  more_items_available: boolean
+  last_token: string | null
 }
