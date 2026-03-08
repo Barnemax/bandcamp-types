@@ -41,6 +41,7 @@ export { isCollectionPage, isDownloadPage, isTralbumPage, isYumPage } from './gu
 export {
   BANDCAMP_COLLECTION_URL,
   BANDCAMP_COLLECTORS_URL,
+  BANDCAMP_COLLECTION_INITIAL_TOKEN,
   BANDCAMP_REDEEM_PATH,
   SEL_PAGE_BLOB,
   SEL_COLLECTORS_BLOB,

@@ -3,6 +3,9 @@
 export const BANDCAMP_COLLECTION_URL = 'https://bandcamp.com/api/fancollection/1/collection_items'
 export const BANDCAMP_COLLECTORS_URL = 'https://bandcamp.com/api/tralbumcollectors/1/thumbs'
 
+/** Token used to fetch the full collection from the beginning (Bandcamp API sentinel value) */
+export const BANDCAMP_COLLECTION_INITIAL_TOKEN = '9999999999::a::'
+
 /** Relative path — prepend the band's origin, e.g. `https://artist.bandcamp.com` */
 export const BANDCAMP_REDEEM_PATH = '/api/codes/1/redeem'
 
